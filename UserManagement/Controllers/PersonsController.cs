@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UserManagement.Models;
 using UserManagement.Repository;
 using UserManagement.Repository.Interface;
+using UserManagement.ViewModels;
 
 namespace UserManagement.Controllers
 {
@@ -21,38 +22,61 @@ namespace UserManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Person person)
+        [Route("Insert")]
+        public ActionResult Insert(Person person)
         {
-            personRepository.insert(person);
+            personRepository.Insert(person);
             return Ok();
         }
 
-        ////[HttpGet]
-        //public ActionResult Get()
-        //{
-        //    IEnumerable<Person> persons = personRepository.Get();
-        //    return Ok(persons);
-        //}
+        [HttpPost("Insert2")]
+        //[Route("Insert2")]
+        public ActionResult Insert2(Person person)
+        {
+            personRepository.Insert(person);
+            return Ok();
+        }
+
         [HttpGet]
+        public ActionResult Get()
+        {
+            IEnumerable<Person> persons = personRepository.Get();
+            return Ok(persons);
+        }
+        [HttpGet("{NIK}")]
         public ActionResult Get(string NIK)
         {
             var person = personRepository.Get(NIK);
             return Ok(person);
         }
+        [HttpGet("GetFirstName/{NIK}")]
+        public ActionResult GetFirstName(string NIK)
+        {
+            PersonVM person = personRepository.GetFirstName(NIK);
+            return Ok(person);
+        }
+
+        [HttpGet("GetListFirstName")]
+        public ActionResult GetListFirstName()
+        {
+            IEnumerable<PersonVM> personsvm = personRepository.GetListFirstName();
+            return Ok(personsvm);
+        }
 
         //COBA2 DELETE SYNTAX
-        [HttpDelete]
-        public ActionResult GetActionResult(string NIK)
+        //[HttpDelete]
+        public ActionResult Delete(string NIK)
         {
-            personRepository.delete(NIK);
+            personRepository.Delete(NIK);
             return Ok();
         }
 
-        [HttpPut]
+        //[HttpPut]
         public ActionResult Update(Person person)
         {
-            personRepository.update(person);
+            personRepository.Update(person);
             return Ok();
         }
+        
     }
 }
