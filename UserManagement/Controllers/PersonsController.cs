@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using UserManagement.Models;
 using UserManagement.Repository;
@@ -99,7 +100,7 @@ namespace UserManagement.Controllers
             }
             catch (Exception)
             {
-                return NotFound("Error : NIK is not match!!");
+                return StatusCode(400, new { status = HttpStatusCode.NotModified, message = "Error : Data not updated" });
             }
                                 
         }       
