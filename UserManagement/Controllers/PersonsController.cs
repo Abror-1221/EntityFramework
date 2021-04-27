@@ -22,19 +22,16 @@ namespace UserManagement.Controllers
         }
 
         [HttpPost]
-        [Route("Insert")]
-        public ActionResult Insert(Person person)
+        public ActionResult Post(Person person)
         {
-            personRepository.Insert(person);
-            return Ok();
+            return Ok(personRepository.Insert(person));
         }
 
-        [HttpPost("Insert2")]
+        [HttpPost("Insert")]
         //[Route("Insert2")]
-        public ActionResult Insert2(Person person)
+        public ActionResult Post2(Person person)
         {
-            personRepository.Insert(person);
-            return Ok();
+            return Ok(personRepository.Insert(person));
         }
 
         [HttpGet]
@@ -47,13 +44,28 @@ namespace UserManagement.Controllers
         public ActionResult Get(string NIK)
         {
             var person = personRepository.Get(NIK);
-            return Ok(person);
+            if (person != null)
+            {
+                return Ok(person);
+            }
+            else
+            {
+                return NotFound("Error : NIK not found!!");
+            }
+            
         }
         [HttpGet("GetFirstName/{NIK}")]
         public ActionResult GetFirstName(string NIK)
         {
             PersonVM person = personRepository.GetFirstName(NIK);
-            return Ok(person);
+            if (person != null)
+            {
+                return Ok(person);
+            }
+            else
+            {
+                return NotFound("Error : NIK not found!!");
+            }
         }
 
         [HttpGet("GetListFirstName")]
@@ -64,19 +76,32 @@ namespace UserManagement.Controllers
         }
 
         //COBA2 DELETE SYNTAX
-        //[HttpDelete]
+        [HttpDelete("{NIK}")]
         public ActionResult Delete(string NIK)
         {
-            personRepository.Delete(NIK);
-            return Ok();
+            var person = personRepository.Get(NIK);
+            if (person != null)
+            {
+                return Ok(personRepository.Delete(NIK));
+            }
+            else
+            {
+                return NotFound("Error : NIK not found!!");
+            }             
         }
 
-        //[HttpPut]
+        [HttpPut]
         public ActionResult Update(Person person)
         {
-            personRepository.Update(person);
-            return Ok();
-        }
-        
+            try
+            {
+                return Ok(personRepository.Update(person));
+            }
+            catch (Exception)
+            {
+                return NotFound("Error : NIK is not match!!");
+            }
+                                
+        }       
     }
 }
