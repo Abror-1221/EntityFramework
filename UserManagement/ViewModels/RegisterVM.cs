@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UserManagement.Models
+namespace UserManagement.ViewModels
 {
-    [Table("tb_m_person")]
-    public class Person
+    public class RegisterVM
     {
-        [Key]
         public string NIK { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,5 +15,9 @@ namespace UserManagement.Models
         public DateTime BirthDate { get; set; }
         public int Salary { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
+        public string Degree { get; set; }
+        public string GPA { get; set; }
+        public int University { get; set; }
     }
 }

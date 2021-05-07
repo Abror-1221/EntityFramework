@@ -9,12 +9,12 @@ namespace UserManagement.Repository.Interface
 {
     interface IPersonRepository
     {
-        IEnumerable<Person> Get();
+        IEnumerable<Persons> Get();
         IEnumerable<PersonVM> GetListFirstName();
-        Person Get(string NIK);
-        Person Insert(Person person);
-        Person Update(Person person);
-        Person Delete(string NIK);
+        Persons Get(string NIK);
+        Persons Insert(Persons person);
+        Persons Update(Persons person);
+        Persons Delete(string NIK);
         PersonVM GetFirstName(string NIK);
     }
 }

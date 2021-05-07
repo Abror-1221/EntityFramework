@@ -19,7 +19,7 @@ namespace UserManagement.Repository
         }
 
         //COBA2 DELETE SYNTAX
-        public Person Delete(string NIK)
+        public Persons Delete(string NIK)
         {
             var delPerson = conn.Persons.Find(NIK);
             conn.Persons.Remove(delPerson);
@@ -27,14 +27,14 @@ namespace UserManagement.Repository
             return delPerson;
         }
 
-        public IEnumerable<Person> Get()
+        public IEnumerable<Persons> Get()
         {
-            IEnumerable<Person> persons = new List<Person>();
+            IEnumerable<Persons> persons = new List<Persons>();
             persons = conn.Persons.ToList();
             return persons;
         }
 
-        public Person Get(string NIK)
+        public Persons Get(string NIK)
         {
             var person = conn.Persons.Find(NIK);
             return person;
@@ -51,7 +51,7 @@ namespace UserManagement.Repository
 
         public IEnumerable<PersonVM> GetListFirstName()
         {
-            IEnumerable<Person> persons = conn.Persons.ToList();
+            IEnumerable<Persons> persons = conn.Persons.ToList();
             List<PersonVM> personsvm = new List<PersonVM>();
             foreach (var item in persons)
             {
@@ -63,7 +63,7 @@ namespace UserManagement.Repository
             return personsvm;
         }
 
-        public Person Insert(Person person)
+        public Persons Insert(Persons person)
         {
             conn.Persons.Add(person);
             var result = conn.SaveChanges();
@@ -78,7 +78,7 @@ namespace UserManagement.Repository
         //}
 
         //entitystate.modified
-        public Person Update(Person person)
+        public Persons Update(Persons person)
         {
             conn.Entry(person).State = EntityState.Modified;
             var result = conn.SaveChanges();
