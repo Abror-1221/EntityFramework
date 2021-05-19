@@ -2,7 +2,102 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2 class="mt-5">Grid System</h2>
+
+<div class="container">
+    <div id="container1" class="row mb-5 mt-4">
+        <div class="col-md">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
+        <div class="col-md">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
+        <div class="col-md">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
+        <div class="col-md">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
+        <div class="col-md">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</div>
+    </div>
 </div>
+
+<div id="container2" class="row">
+    <div class="col-6">
+        Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+        <br><button type="button" class="mr-2" onclick="changeMargin1()">Change Margin</button>
+        <button type="button" class="mr-2" onclick="changeMargin2()">Default Margin</button>
+    </div>
+
+    <div class="col-6">
+        <div id="a" class="row">
+            <div class="col">
+                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+            </div>
+        </div>
+        <div id="b" class="row">
+            <div class="col">
+                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="container3" class="col">
+        <p class="p1">Body paragraf 1</p>
+        <p class="p2">Body paragraf 2</p>
+        <p class="p3">Body paragraf 3</p>
+</div>
+
+<button type="button" class="mr-2" onclick="document.querySelector('#container1').style.backgroundColor = 'orange'">Orange Body</button>
+<button type="button" class="mr-2" onclick="document.querySelector('#container1').style.backgroundColor = 'white'">White Body</button>
+<button type="button" class="mr-2">Change Body Color</button>
+<button type="button" class="mr-2 btnBgr"> Red Body Color</button>
+
+<div>
+
+    <h1 class="mt-5">Employee</h1>
+    @*<ul id="listperson">
+        </ul>*@
+<button id="btnInsert" type="button" data-bs-toggle="modal" class="btnInsert btn-outline-primary" data-bs-target="#insertModal">Insert</button>
+<table id="myTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="tabelSW">
+    </tbody>
+</table>
+</div>
+
+<script>
+    //function changeColor1() {
+    //    const body1 = document.querySelector("#container1");
+    //    body1.style.backgroundColor = 'orange';
+    //}
+    //function changeColor2() {
+    //    const body2 = document.querySelector("#container1");
+    //    body2.style.backgroundColor = 'white';
+    //}
+    
+</script>
+
+
+
+
+
+@*<h1 id="judul">Hello Wolrd</h1>
+    <div id="container">
+        <section id="a">
+            <p class="p1">paragraf 1</p>
+            <p class="p2">paragraf 2</p>
+            <a href="#">link</a>
+            <p class="p3">paragraf 3</p>
+        </section>
+        <section id="b">
+            <p id="a">paragraf 4</p>
+            <ul>
+                <li>list1</li>
+                <li>list2</li>
+                <li>list3</li>
+            </ul>
+        </section>
+    </div>*@

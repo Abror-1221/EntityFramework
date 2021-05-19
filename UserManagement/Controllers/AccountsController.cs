@@ -24,6 +24,7 @@ namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class AccountsController : BaseController<Accounts, AccountRepository, string>
     {
         private readonly AccountRepository accountRepository;
@@ -154,9 +155,8 @@ namespace UserManagement.Controllers
             return Ok(data);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("UserData")]
-        [EnableCors("AllowOrigin")]
         public async Task<ActionResult> ViewDataAll()
         {
             var data = from p in myContext.Persons

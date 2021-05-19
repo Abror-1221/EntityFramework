@@ -58,8 +58,8 @@ namespace UserManagement
             //Konfigurasi CORS
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44305"));
-                //c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44305").AllowAnyHeader());
+                //c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader());
             });
 
             services.AddScoped<PersonRepository>();
@@ -129,6 +129,7 @@ namespace UserManagement
 
             app.UseRouting();
 
+            //app.UseCors(options => options.WithOrigins("https://localhost:44305"));
             app.UseCors();
 
             app.UseAuthentication();

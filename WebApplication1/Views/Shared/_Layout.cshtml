@@ -9,22 +9,39 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Fixed Top Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -35,14 +52,167 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    @*DataTables installation*@
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.24/af-2.3.6/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/cr-1.5.3/date-1.0.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.1/sp-1.2.2/sl-1.3.3/datatables.js"></script>
     @RenderSection("Scripts", required: false)
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="insertModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleInsertModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="insertForm" class="row needs-validation" novalidate>
+                        <div class="col-md-4 ">
+                            <label for="nik" class="form-label">NIK :</label>
+                            <input type="text" name="nik" class="form-control" id="nik" pattern="[0-9]+" required />
+                            <div id="invalid1" class="invalid-feedback">
+                                Please provide a NIK (only number character)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="firstName" class="form-label">First Name :</label>
+                            <input type="text" name="firstName" id="firstName" class="form-control" pattern="[a-zA-Z]+" required />
+                            <div class="invalid-feedback">
+                                Please provide a first name (only uppercase and lowercase letter)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="lastName" class="form-label">Last Name :</label>
+                            <input type="text" name="lastName" id="lastName" class="form-control" pattern="[a-zA-Z]+" required />
+                            <div class="invalid-feedback">
+                                Please provide a last name (only uppercase and lowercase letter)
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="phone" class="form-label">Phone :</label>
+                            <input type="text" name="phone" id="phone" class="form-control" pattern="[0-9]+" required />
+                            <div class="invalid-feedback">
+                                Please provide a phone number (only number character)
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="birthDate" class="form-label">Birth Date :</label>
+                            <input type="date" name="birthDate" id="birthDate" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="salary" class="form-label">Salary :</label>
+                            <input type="number" name="salary" id="salary" class="form-control" pattern="[0-9]+" required />
+                            <div class="invalid-feedback">
+                                Required (only number character)
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email" name="email" id="email" class="form-control" required />
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-2">
+                            <label for="password" class="form-label">Password :</label>
+                            <input type="password" name="password" id="password" class="form-control" pattern="[a-zA-Z0-9]{3,10}" required />
+                            <div class="invalid-feedback">
+                                Required only number, uppercase, and lowercase letter, and at least 3 - 10 characters
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-2">
+                            <label for="degree" class="form-label">Degree :</label>
+                            <input type="text" name="degree" id="degree" class="form-control" pattern="[a-zA-Z0-9]+" required />
+                            <div class="invalid-feedback">
+                                Required only number, uppercase, and lowercase letter
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-2">
+                            <label for="gpa" class="form-label">GPA :</label>
+                            <input type="text" name="gpa" id="gpa" class="form-control" pattern="[0-9]+\.[0-9]+" required />
+                            <div class="invalid-feedback">
+                                Required (example : 4.00)
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-lg-4 mb-lg-4">
+                            <label for="university">University :</label>
+                            @*<input type="number" name="university" id="university" class="form-control">*@
+                            <select name="university" id="university" class="form-select" required>
+                                <option value="">Select University</option>
+                                <option value="1">Universitas Telkom</option>
+                                <option value="2">Institut Teknologi Sepuluh Nopember</option>
+                                <option value="3">Universitas Andalas</option>
+                                <option value="4">Universitas Indonesia</option>
+                                <option value="5">Universitas Gadjah Mada</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Choose university required
+                            </div>
+                        </div>
+                        @*<button type="submit" id="insert" class="btn btn-success" onclick="Insert()">Submit</button>*@
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="insert" class="btn btn-success" onclick="Insert()">Submit</button>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/latihan.js" asp-append-version="true"></script>
+
+
+
+    <style>
+        .footer {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+    <div class="footer mt-auto py-4 bg-dark">
+        <div class="row">
+            <div class="col">
+                <span class="text-muted">Indonesia</span>
+            </div>
+            <div class="col">
+                <span class="text-muted">Jawa Barat</span>
+            </div>
+            <div class="col">
+                <span class="text-muted">Jakarta Barat</span>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
