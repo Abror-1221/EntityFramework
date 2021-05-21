@@ -24,7 +24,6 @@ namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("AllowOrigin")]
     public class AccountsController : BaseController<Accounts, AccountRepository, string>
     {
         private readonly AccountRepository accountRepository;
@@ -171,6 +170,7 @@ namespace UserManagement.Controllers
                            NIK = p.NIK,
                            FirstName = p.FirstName,
                            LastName = p.LastName,
+                           EducationId = e.Id,
                            Role = r.Name,
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,

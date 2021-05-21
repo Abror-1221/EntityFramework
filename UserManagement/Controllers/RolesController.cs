@@ -11,7 +11,7 @@ using UserManagement.Repository.Data;
 
 namespace UserManagement.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : BaseController<Roles, RoleRepository, int>

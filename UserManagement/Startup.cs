@@ -58,7 +58,7 @@ namespace UserManagement
             //Konfigurasi CORS
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44305").AllowAnyHeader());
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44305").AllowAnyHeader().AllowAnyMethod());
                 //c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader());
             });
 

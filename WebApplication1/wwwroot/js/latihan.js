@@ -1,4 +1,6 @@
-﻿//1 dimensi
+﻿//const { data, error } = require("jquery");
+
+//1 dimensi
 let array = [1, 2, 3, 4];
 //multi dimensi
 let arrayMultiDimensi = ['a', 'b', 'c', 1, 2, [3, 4, 5], true];
@@ -122,39 +124,47 @@ function detail(stringURL) {
     });
 }
 
+//CREATE FUNCTION
+//$(document).ready(function () {
+//    $("#insertAccess").on('click', '#btnInsert', function () {
+//        $("#insertModal").modal("show");
+//        $("#insertForm").on('submit', function () {
+//            var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+//            obj.NIK = $("#nik").val();
+//            obj.FirstName = $("#firstName").val();
+//            obj.LastName = $("#lastName").val();
+//            obj.Phone = $("#phone").val();
+//            obj.BirthDate = $("#birthDate").val();
+//            obj.Salary = $("#salary").val();
+//            obj.Email = $("#email").val();
+//            obj.Password = $("#password").val();
+//            obj.Degree = $("#degree").val();
+//            obj.GPA = $("#gpa").val();
+//            obj.University = $("#university").val();
+//            //var json = ;
+//            //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
+//            $.ajax({
+//                type: "POST",
+//                url: "https://localhost:44361/API/accounts/Register",
+//                data: JSON.stringify(obj),
+//                contentType: "application/json; charset=utf-8",
+//                datatype: "json",
+//                beforeSend: function () {
+//                    $("#insert").val("Inserting");
+//                },
+//                success: function (data) {
+//                    //$('#insertForm')[0].reset();
+//                    $('#insert').val("Insert");
+//                    //$("#insertModal").modal("hide");
+//                    $("#myTable").DataTable().ajax.reload();
 
-function Insert() {
-    var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
-    obj.NIK = $("#nik").val();
-    obj.FirstName = $("#firstName").val();
-    obj.LastName = $("#lastName").val();
-    obj.Phone = $("#phone").val();
-    obj.BirthDate = $("#birthDate").val();
-    obj.Salary = $("#salary").val();
-    obj.Email = $("#email").val();
-    obj.Password = $("#password").val();
-    obj.Degree = $("#degree").val();
-    obj.GPA = $("#gpa").val();
-    obj.University = $("#university").val();
-    //var json = ;
-    //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
-    $.ajax({
-        type: "POST",
-        url: "https://localhost:44361/API/accounts/Register",
-        data: JSON.stringify(obj),
-        contentType : "application/json; charset=utf-8",
-        datatype: "json",
-        success: function (result) {
-            $("#insertForm").DataTable().ajax.reload(null, false)
-        }
-    }).done((result) => {
-        alert("Submit Succeess")
-        //$("#insertForm").DataTable().ajax.reload(null, false)
-        //setTimeout(alert.bind(null, "The paragraph gone!"));
-    }).fail((error) => {
-        alert("Submit Error")
-    })
-}
+//                }
+//            })
+//        })
+//    })
+//}) 
+//function Insert() {
+//}
 
 //DataTables
 $(document).ready(function () {
@@ -180,38 +190,16 @@ $(document).ready(function () {
             },
             { "data": "salary" },
             { "data": null,
-                //"data": 
-                //    {
-                //        "buttons":
-                //        {
-                //            text: 'Test'
-                //            //action: function (e, dt, node, config) {
-                //            //    dt.ajax.reload();
-                //            //}
-                //        }
-                //    }
-                //}
+                
 
                 "render": function (data, type, row) {
                     //var data = row.data();
                     return '<button class="btn btn-primary" data-bs-toggle="modal" type="button" data-id="' + row.nik + '" data-firstname="' + row.firstName + '" data-lastname="' + row.lastName + '" data-role="' + row.role
-                        + '" data-phone=" +62' + row.phone.substr(1) + '" data-date="' + row.birthDate + '" data-salary="' + row.salary + '" data-email="' + row.email + '" data-degree="' + row.degree
-                        + '" data-gpa="' + row.gpa + '" data-university="' + row.university + '" data-bs-target="#staticBackdrop">Details</button >'
+                        + '" data-phone=" +62' + row.phone.substr(1) + '" data-date="' + row.birthDate.slice(0,10) + '" data-salary="' + row.salary + '" data-email="' + row.email + '" data-degree="' + row.degree
+                        + '" data-gpa="' + row.gpa + '" data-university="' + row.university
+                        + '" data-bs-target="#staticBackdrop">Details</button >  <button id="btnEdit" type="button"  class="btn btn-secondary"> Edit </button>  <button id="btnDelete" type="button"  class="btn btn-warning"> Delete </button>'
                 }
-                //"responsive": {
-                //    "details": {
-                //        "display": $.fn.dataTable.Responsive.display.modal({
-                //            "header": function (row) {
-                //                var data = row.data();
-                //                return 'Details for ' + data[0] + ' ' + data[1];
-                //            }
-                //        }),
-                //        "renderer": $.fn.dataTable.Responsive.renderer.tableAll()
-                //    }
-                //}
-
             }
-            //,{ "data": "lastName" }
         ],
         "columnDefs": [{
             "searchable": false,
@@ -250,21 +238,185 @@ $(document).ready(function () {
 
     });
 
-    //$('#myTable').on('click', '#insert', function () {
-    //    var name = $('td', this).eq(2).text();
-    //    $('#exampleModal').modal("show");
-    //    $('.modal-body').text(name);
-    //});
-
-    //$("#myTable").on('click', '#insert', function () {
-
-    //    // show Modal
-    //    $('#exampleModal').modal('show');
-    //});
-
     t.on('order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         } );
-    } ).draw();
+    }).draw();
+
+    //DELETE
+    $("#myTable tbody").on('click', '#btnDelete', function () {
+        var data = t.row($(this).parents('tr')).data();
+        $("#deleteModal").modal("show");
+        console.log(data);
+        $("#deleteModal").on('click', '#delete', function () {
+            //console.log(data);
+            //var nik = ;
+            $.ajax({
+                type: "DELETE",
+                url: "https://localhost:44361/API/persons/" + data.nik,
+                success: function (result) {
+                    console.log(data.nik);
+                    //$("#deleteModal").modal("hide");
+                    //$("#deleteModal").ajax.reload();
+                    //$("myTable").DataTable().ajax.reload();
+                }
+            })
+
+            $.ajax({
+                type: "DELETE",
+                url: "https://localhost:44361/API/educations/" + data.educationId,
+                success: function (result) {
+                    console.log(data.nik);
+                    $("#deleteModal").modal("hide");
+                    //$("#deleteModal").ajax.reload();
+                    $("myTable").DataTable().ajax.reload();
+                }
+            })
+        })
+    })
+
+    //REGISTRATION
+    $("#insertAccess").on('click', '#btnInsert', function () {
+        $("#insertModal").modal("show");
+        $("#insertForm").on('submit', function () {
+            var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+            obj.NIK = $("#nik").val();
+            obj.FirstName = $("#firstName").val();
+            obj.LastName = $("#lastName").val();
+            obj.Phone = $("#phone").val();
+            obj.BirthDate = $("#birthDate").val();
+            obj.Salary = $("#salary").val();
+            obj.Email = $("#email").val();
+            obj.Password = $("#password").val();
+            obj.Degree = $("#degree").val();
+            obj.GPA = $("#gpa").val();
+            obj.University = $("#university").val();
+            //var json = ;
+            //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44361/API/accounts/Register",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                beforeSend: function () {
+                    $("#insert").val("Inserting");
+                },
+                success: function (data) {
+                    //$('#insert').val("Insert");
+                    //t.ajax.reload();
+                    alert("Success submit");
+                }
+            })
+        })
+    })
+
+
+    //UPDATETE
+    $("#myTable tbody").on('click', '#btnEdit', function () {
+        var data = t.row($(this).parents('tr')).data();
+
+        $("#nikE").val(data.nik);
+        $("#firstNameE").val(data.firstName);
+        $("#lastNameE").val(data.lastName);
+        $("#phoneE").val(data.phone);
+        $("#birthDateE").val(data.birthDate);
+        $("#salaryE").val(data.salary);
+        $("#emailE").val(data.email);
+        $("#degreeE").val(data.degree);
+        $("#gpaE").val(data.gpa);
+        $("#universityE").val(data.university);
+        $("#editModal").modal("show");
+        //console.log(data);
+        $("#editModal").on('click', '#edit', function () {
+            console.log(data);
+            //var nik = ;
+            var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+            obj1.NIK = $("#nikE").val();
+            obj1.FirstName = $("#firstNameE").val();
+            obj1.LastName = $("#lastNameE").val();
+            obj1.Phone = $("#phoneE").val();
+            obj1.BirthDate = $("#birthDateE").val();
+            obj1.Salary = $("#salaryE").val();
+            obj1.Email = $("#emailE").val();
+            var obj2 = new Object();
+            obj2.Id = data.educationId;
+            obj2.Degree = $("#degreeE").val();
+            obj2.GPA = $("#gpaE").val();
+            obj2.University_Id = $("#universityE").val();
+            $.ajax({
+                type: "PUT",
+                url: "https://localhost:44361/API/persons",
+                data: JSON.stringify(obj1),
+                contentType: "application/json; charset=utf-8",
+                datatype: "json"
+                //beforeSend: function () {
+                //    $("#edit").val("Saving...");
+                //},
+                //success: function (data) {
+                //    //$('#insert').val("Insert");
+                //    //t.ajax.reload();
+                //    alert("Success submit");
+                //}
+            }).done((result) => {
+                $.ajax({
+                    type: "PUT",
+                    url: "https://localhost:44361/API/educations",
+                    data: JSON.stringify(obj2),
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    beforeSend: function () {
+                        $("#edit").val("Saving...");
+                    }
+                    //,success: function (data) {
+                    //    //$('#insert').val("Insert");
+                    //    //t.ajax.reload();
+                    //    alert("Success submit");
+                    //}
+                }).done((result) => {
+                    alert("Update Success");
+                    $("myTable").DataTable().ajax.reload();
+                }).fail((error) => {
+                    alert("Update Error");
+                })
+            })
+        })
+    })
+
+
+
+    //function Insert() {
+    //    var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+    //    obj.NIK = $("#nik").val();
+    //    obj.FirstName = $("#firstName").val();
+    //    obj.LastName = $("#lastName").val();
+    //    obj.Phone = $("#phone").val();
+    //    obj.BirthDate = $("#birthDate").val();
+    //    obj.Salary = $("#salary").val();
+    //    obj.Email = $("#email").val();
+    //    obj.Password = $("#password").val();
+    //    obj.Degree = $("#degree").val();
+    //    obj.GPA = $("#gpa").val();
+    //    obj.University = $("#university").val();
+    //    //var json = ;
+    //    //isi dari object kalian buat sesuai dengan bentuk object yang akan di post
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "https://localhost:44361/API/accounts/Register",
+    //        data: JSON.stringify(obj),
+    //        contentType: "application/json; charset=utf-8",
+    //        datatype: "json",
+    //        //beforeSend: function () {
+    //        //    $("#insert").val("Inserting");
+    //        //},
+    //        success: function (data) {
+    //            //$('#insertForm')[0].reset();
+    //            //$('#insert').val("Insert");
+    //            //$("#insertModal").modal("hide");
+    //            $("myTable").DataTable().ajax.reload();
+    //        }
+    //    })
+    //}
 })
+
