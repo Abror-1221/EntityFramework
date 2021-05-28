@@ -24,6 +24,7 @@ namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[EnableCors("AllowOrigin")]
     public class AccountsController : BaseController<Accounts, AccountRepository, string>
     {
         private readonly AccountRepository accountRepository;
@@ -172,13 +173,15 @@ namespace UserManagement.Controllers
                            LastName = p.LastName,
                            EducationId = e.Id,
                            Role = r.Name,
+                           RoleId = r.Id,
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,
                            Salary = p.Salary,
                            Email = p.Email,
                            Degree = e.Degree,
                            GPA = e.GPA,
-                           University = u.Name
+                           University = u.Name,
+                           UniversityId = u.Id
                        };
             
             return Ok(await data.ToListAsync());

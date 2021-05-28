@@ -36,9 +36,9 @@
 </div>
 
 <div id="container3" class="col">
-        <p class="p1">Body paragraf 1</p>
-        <p class="p2">Body paragraf 2</p>
-        <p class="p3">Body paragraf 3</p>
+    <p class="p1">Body paragraf 1</p>
+    <p class="p2">Body paragraf 2</p>
+    <p class="p3">Body paragraf 3</p>
 </div>
 
 <button type="button" class="mr-2" onclick="document.querySelector('#container1').style.backgroundColor = 'orange'">Orange Body</button>
@@ -52,28 +52,275 @@
     @*<ul id="listperson">
         </ul>*@
     @*<div class="row">
-        
-        <button id="btnRefresh" type="button" class="btn btn-outline-primary">Refresh</button>
-    </div>*@
+
+            <button id="btnRefresh" type="button" class="btn btn-outline-primary">Refresh</button>
+        </div>*@
     @*<button id="btnRefresh" type="button" class="btn btn-outline-primary">Refresh</button>*@
     @*<button id="btnInsert" type="button" data-bs-toggle="modal" class="btn btn-outline-primary" data-bs-target="#insertModal">Insert</button>*@
     <button id="btnInsert" type="button" class="btn btn-outline-primary">Insert</button>
-<table id="myTable" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Salary</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @*<tbody class="tabelSW">
-    </tbody>*@
-</table>
+    <button id="Tes" type="button" onclick="Alert()" class="btn btn-outline-primary">Tes Alert</button>
+    <table id="myTable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Salary</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        @*<tbody class="tabelSW">
+            </tbody>*@
+    </table>
 </div>
 
+<!--Modal DATA TABLES DETAILS-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal DATA TABLES POST-->
+<div class="modal fade" id="insertModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="insertForm" class="row needs-validation" novalidate>
+                    <div class="col-md-4 ">
+                        <label for="nik" class="form-label">NIK :</label>
+                        <input type="text" name="nik" class="form-control" id="nik" pattern="[0-9]+" required />
+                        <div id="invalid1" class="invalid-feedback">
+                            Please provide a NIK (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">First Name :</label>
+                        <input type="text" name="firstName" id="firstName" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a first name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Last Name :</label>
+                        <input type="text" name="lastName" id="lastName" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="phone" class="form-label">Phone :</label>
+                        <input type="text" name="phone" id="phone" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a phone number (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="birthDate" class="form-label">Birth Date :</label>
+                        <input type="date" name="birthDate" id="birthDate" class="form-control" required />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="salary" class="form-label">Salary :</label>
+                        <input type="number" name="salary" id="salary" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="email" class="form-label">Email :</label>
+                        <input type="email" name="email" id="email" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="password" class="form-label">Password :</label>
+                        <input type="password" name="password" id="password" class="form-control" pattern="[a-zA-Z0-9]{3,10}" required />
+                        <div class="invalid-feedback">
+                            Required only number, uppercase, and lowercase letter, and at least 3 - 10 characters
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="degree" class="form-label">Degree :</label>
+                        <input type="text" name="degree" id="degree" class="form-control" pattern="[a-zA-Z0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required only number, uppercase, and lowercase letter
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="gpa" class="form-label">GPA :</label>
+                        <input type="text" name="gpa" id="gpa" class="form-control" pattern="[0-9]+\.[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (example : 4.00)
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-lg-4 mb-lg-4">
+                        <label for="university">University :</label>
+                        @*<input type="number" name="university" id="university" class="form-control">*@
+                        <select name="university" id="university" class="form-select" required>
+                            <option value="">Select University</option>
+                            <option value="1">Universitas Telkom</option>
+                            <option value="2">Institut Teknologi Sepuluh Nopember</option>
+                            <option value="3">Universitas Andalas</option>
+                            <option value="4">Universitas Indonesia</option>
+                            <option value="5">Universitas Gadjah Mada</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Choose university required
+                        </div>
+                    </div>
+                    @*<button type="submit" id="insert" name="Submit" value="Submit" class="btn btn-success" onclick="Insert()">Sumbit</button>*@
+                    <input type="submit" id="insert" name="Submit" value="Submit" class="btn btn-success" />
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @*<input type="submit" id="insert" name="Submit" value="Submit" class="btn btn-success"/>*@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal DATA TABLES EDIT-->
+<div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Update Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editForm" class="row needs-validation" novalidate>
+                    <div class="col-md-4 ">
+                        <label for="nikE" class="form-label">NIK :</label>
+                        <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a NIK (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstNameE" class="form-label">First Name :</label>
+                        <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a first name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastNameE" class="form-label">Last Name :</label>
+                        <input type="text" name="lastNameE" id="lastNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="phoneE" class="form-label">Phone :</label>
+                        <input type="text" name="phoneE" id="phoneE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a phone number (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="birthDateE" class="form-label">Birth Date :</label>
+                        <input type="date" name="birthDateE" id="birthDateE" class="form-control" required />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="salaryE" class="form-label">Salary :</label>
+                        <input type="number" name="salaryE" id="salaryE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="emailE" class="form-label">Email :</label>
+                        <input type="email" name="emailE" id="emailE" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="degreeE" class="form-label">Degree :</label>
+                        <input type="text" name="degreeE" id="degreeE" class="form-control" pattern="[a-zA-Z0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required only number, uppercase, and lowercase letter
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="gpaE" class="form-label">GPA :</label>
+                        <input type="text" name="gpaE" id="gpaE" class="form-control" pattern="[0-9]+\.[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (example : 4.00)
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-lg-4 mb-lg-4">
+                        <label for="universityE">University :</label>
+                        <select name="universityE" id="universityE" class="form-select" required>
+                            <option value="">Select University</option>
+                            <option value="1">Universitas Telkom</option>
+                            <option value="2">Institut Teknologi Sepuluh Nopember</option>
+                            <option value="3">Universitas Andalas</option>
+                            <option value="4">Universitas Indonesia</option>
+                            <option value="5">Universitas Gadjah Mada</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Choose university required
+                        </div>
+                    </div>
+                    <button type="submit" id="edit" class="btn btn-success">Save changes</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--WARNING DELET DATA TABLE-->
+<div class="modal fade" id="deleteModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">WARNING!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete the data?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" id="delete" name="Yes" value="Yes" class="btn btn-success">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     //function changeColor1() {
     //    const body1 = document.querySelector("#container1");
@@ -83,7 +330,7 @@
     //    const body2 = document.querySelector("#container1");
     //    body2.style.backgroundColor = 'white';
     //}
-    
+
 </script>
 
 

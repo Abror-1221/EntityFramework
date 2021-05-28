@@ -105,6 +105,10 @@ for (var i = 0; i < animals.length; i++) {
         })
 })()
 
+function Alert() {
+    $("#myTable").DataTable().ajax.reload();
+}
+
 function detail(stringURL) {
     $.ajax({
         url: stringURL
@@ -171,11 +175,11 @@ $(document).ready(function () {
     
     var t = $("#myTable").DataTable({
         "ajax": {
-            "url": "https://localhost:44361/API/accounts/UserData",
+            "url": "/Accounts/GetUserData",
             "datatype": "json",
             "dataSrc" : ""
         },
-        dom: 'lBfrtip',
+        dom: "Bfltrip",
         buttons: [
             'excel'
         ],
@@ -197,7 +201,8 @@ $(document).ready(function () {
                     return '<button class="btn btn-primary" data-bs-toggle="modal" type="button" data-id="' + row.nik + '" data-firstname="' + row.firstName + '" data-lastname="' + row.lastName + '" data-role="' + row.role
                         + '" data-phone=" +62' + row.phone.substr(1) + '" data-date="' + row.birthDate.slice(0,10) + '" data-salary="' + row.salary + '" data-email="' + row.email + '" data-degree="' + row.degree
                         + '" data-gpa="' + row.gpa + '" data-university="' + row.university
-                        + '" data-bs-target="#staticBackdrop">Details</button >  <button id="btnEdit" type="button"  class="btn btn-secondary"> Edit </button>  <button id="btnDelete" type="button"  class="btn btn-warning"> Delete </button>'
+                        + '" data-bs-target="#staticBackdrop">Details</button >  <button id="btnEdit" type="button"  class="btn btn-secondary"> Edit </button>  <button id="btnDelete" type="button"' +
+                        'class="btn btn-warning"> Delete </button>'
                 }
             }
         ],
@@ -242,39 +247,9 @@ $(document).ready(function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             cell.innerHTML = i+1;
         } );
-    }).draw();
-
-    //DELETE
-    $("#myTable tbody").on('click', '#btnDelete', function () {
-        var data = t.row($(this).parents('tr')).data();
-        $("#deleteModal").modal("show");
-        console.log(data);
-        $("#deleteModal").on('click', '#delete', function () {
-            //console.log(data);
-            //var nik = ;
-            $.ajax({
-                type: "DELETE",
-                url: "https://localhost:44361/API/persons/" + data.nik,
-                success: function (result) {
-                    console.log(data.nik);
-                    //$("#deleteModal").modal("hide");
-                    //$("#deleteModal").ajax.reload();
-                    //$("myTable").DataTable().ajax.reload();
-                }
-            })
-
-            $.ajax({
-                type: "DELETE",
-                url: "https://localhost:44361/API/educations/" + data.educationId,
-                success: function (result) {
-                    console.log(data.nik);
-                    $("#deleteModal").modal("hide");
-                    //$("#deleteModal").ajax.reload();
-                    $("myTable").DataTable().ajax.reload();
-                }
-            })
-        })
-    })
+    });
+    //.draw()
+    
 
     //REGISTRATION
     $("#insertAccess").on('click', '#btnInsert', function () {
@@ -306,6 +281,7 @@ $(document).ready(function () {
                 success: function (data) {
                     //$('#insert').val("Insert");
                     //t.ajax.reload();
+                    $("myTable").DataTable().ajax.reload();
                     alert("Success submit");
                 }
             })
@@ -326,11 +302,11 @@ $(document).ready(function () {
         $("#emailE").val(data.email);
         $("#degreeE").val(data.degree);
         $("#gpaE").val(data.gpa);
-        $("#universityE").val(data.university);
+        $("#universityE").val(data.universityId);
         $("#editModal").modal("show");
         //console.log(data);
         $("#editModal").on('click', '#edit', function () {
-            console.log(data);
+            //console.log(data);
             //var nik = ;
             var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
             obj1.NIK = $("#nikE").val();
@@ -375,7 +351,8 @@ $(document).ready(function () {
                     //    alert("Success submit");
                     //}
                 }).done((result) => {
-                    alert("Update Success");
+                    //alert("Update Success");
+                    console.log(data);
                     $("myTable").DataTable().ajax.reload();
                 }).fail((error) => {
                     alert("Update Error");
@@ -384,8 +361,39 @@ $(document).ready(function () {
         })
     })
 
+    //DELETE
+    $("#myTable tbody").on('click', '#btnDelete', function () {
+        var data = t.row($(this).parents('tr')).data();
+        $("#deleteModal").modal("show");
+        console.log(data);
+        $("#deleteModal").on('click', '#delete', function () {
+            //console.log(data);
+            //var nik = ;
+            $.ajax({
+                type: "DELETE",
+                url: "https://localhost:44361/API/persons/" + data.nik,
+                success: function (result) {
+                    console.log(data.nik);
+                    //$("#deleteModal").modal("hide");
+                    //$("#deleteModal").ajax.reload();
+                    //$("myTable").DataTable().ajax.reload();
+                }
+            })
 
+            $.ajax({
+                type: "DELETE",
+                url: "https://localhost:44361/API/educations/" + data.educationId,
+                success: function (result) {
+                    console.log(data.nik);
+                    $("#deleteModal").modal("hide");
+                    //$("#deleteModal").ajax.reload();
+                    $("myTable").DataTable().ajax.reload();
+                }
+            })
+        })
+    })
 
+    
     //function Insert() {
     //    var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //    obj.NIK = $("#nik").val();
@@ -419,4 +427,5 @@ $(document).ready(function () {
     //    })
     //}
 })
+
 

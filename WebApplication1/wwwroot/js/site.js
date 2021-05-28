@@ -6,6 +6,7 @@
 const judul = document.querySelectorAll("button");
 //console.log(judul);
 
+
 function changeMargin1() {
     // Create our stylesheet
     var style = document.createElement('style');
